@@ -1,5 +1,5 @@
 import 'package:chat_app/core/utils/firebase_utils.dart';
-import 'package:chat_app/screens/login_screen.dart';
+import 'package:chat_app/view/screen/login_screen.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
