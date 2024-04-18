@@ -1,4 +1,5 @@
 import 'package:chat_app/core/utils/firebase_utils.dart';
+import 'package:chat_app/core/utils/service_locator_utils.dart';
 import 'package:chat_app/view/screen/login_screen.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +13,7 @@ void main() async {
 Future<void> setup() async {
   WidgetsFlutterBinding.ensureInitialized();
   await setUpFirebase();
+  await registerServices();
 }
 
 class MyApp extends StatelessWidget {
