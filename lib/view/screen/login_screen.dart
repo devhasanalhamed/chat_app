@@ -1,3 +1,4 @@
+import 'package:chat_app/core/services/alert_service.dart';
 import 'package:chat_app/core/services/auth_service.dart';
 import 'package:chat_app/core/services/navigation_service.dart';
 import 'package:chat_app/core/utils/regex.dart';
@@ -14,12 +15,13 @@ class LoginScreen extends StatefulWidget {
 
 class LoginScreenState extends State<LoginScreen> {
   final GetIt _getIt = GetIt.instance;
+  final GlobalKey<FormState> _loginFormKey = GlobalKey();
 
   late NavigationService _navigationService;
 
-  final GlobalKey<FormState> _loginFormKey = GlobalKey();
-
   late AuthService _authService;
+
+  late AlertService _alertService;
 
   String? email, password;
 
@@ -27,6 +29,7 @@ class LoginScreenState extends State<LoginScreen> {
   void initState() {
     _authService = _getIt.get<AuthService>();
     _navigationService = _getIt.get<NavigationService>();
+    _alertService = _getIt.get<AlertService>();
     super.initState();
   }
 
@@ -131,9 +134,13 @@ class LoginScreenState extends State<LoginScreen> {
 
             if (result) {
               _navigationService.pushReplacementNamed('/homepage');
-              debugPrint('result true');
+              debugPrint('user has been signed in');
             } else {
-              debugPrint('result false');
+              _alertService.showToast(
+                text: 'Failed to sign in, please try again later',
+                icon: Icons.error,
+              );
+              debugPrint('sign in result is false');
             }
           }
         },
