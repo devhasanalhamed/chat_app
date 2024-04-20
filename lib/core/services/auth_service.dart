@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 
 class AuthService {
   final _firebaseAuth = FirebaseAuth.instance;
@@ -8,7 +9,11 @@ class AuthService {
 
   User? get user => _user;
 
-  AuthService();
+  AuthService() {
+    _firebaseAuth.authStateChanges().listen(
+          authStateChangesStreamListener,
+        );
+  }
 
   Future<bool> login(String email, String password) async {
     try {
@@ -22,8 +27,18 @@ class AuthService {
         return true;
       }
     } catch (e) {
-      print('login error: $e');
+      debugPrint('login error: $e');
     }
     return false;
+  }
+
+  void authStateChangesStreamListener(User? user) {
+    // Todo
+    // _user = user;
+    if (user != null) {
+      _user = user;
+    } else {
+      _user = null;
+    }
   }
 }
