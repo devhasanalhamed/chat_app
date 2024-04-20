@@ -9,6 +9,7 @@ Future<void> setUpFirebase() async {
           "1:567490514774:android:b07f4df8b44d68597410f7", //paste your app id here
       messagingSenderId: "567490514774", //paste your messagingSenderId here
       projectId: "chat-app-fced7", //paste your project id here
+      storageBucket: 'com.chat-app.dev',
     ),
   );
 }
