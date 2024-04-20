@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:chat_app/core/services/auth_service.dart';
 import 'package:chat_app/core/services/media_service.dart';
 import 'package:chat_app/core/services/navigation_service.dart';
+import 'package:chat_app/core/services/storage_service.dart';
 import 'package:chat_app/core/utils/regex.dart';
 import 'package:chat_app/view/widget/custom_form_field.dart';
 import 'package:flutter/material.dart';
@@ -23,6 +24,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   late AuthService _authService;
   late MediaService _mediaService;
   late NavigationService _navigationService;
+  late StorageService _storageService;
 
   final GlobalKey<FormState> _registerFormKey = GlobalKey();
 
@@ -35,6 +37,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     _mediaService = _getIt.get<MediaService>();
     _navigationService = _getIt.get<NavigationService>();
     _authService = _getIt.get<AuthService>();
+    _storageService = _getIt.get<StorageService>();
     super.initState();
   }
 
@@ -173,10 +176,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
           });
           if ((_registerFormKey.currentState?.validate() ?? false) &&
               selectedImage != null) {
-            _registerFormKey.currentState!.save();
-            final result = await _authService.signUp(email!, password!);
-            if (result) {
-              print('result is true');
+            try {
+              _registerFormKey.currentState!.save();
+              final result = await _authService.signUp(email!, password!);
+              if (result) {
+                String? pfpURL = await _storageService.uploadUserPfp(
+                  file: selectedImage!,
+                  uid: _authService.user!.uid,
+                );
+                debugPrint('register result is true');
+              }
+            } catch (e) {
+              debugPrint(e.toString());
             }
           } else {
             debugPrint('register failed');
