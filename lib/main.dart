@@ -1,3 +1,4 @@
+import 'package:chat_app/core/services/auth_service.dart';
 import 'package:chat_app/core/services/navigation_service.dart';
 import 'package:chat_app/core/utils/firebase_utils.dart';
 import 'package:chat_app/core/utils/service_locator_utils.dart';
@@ -22,9 +23,11 @@ class MyApp extends StatelessWidget {
   final GetIt _getIt = GetIt.instance;
 
   late NavigationService _navigationService;
+  late AuthService _authService;
 
   MyApp({super.key}) {
     _navigationService = _getIt<NavigationService>();
+    _authService = _getIt<AuthService>();
   }
 
   // This widget is the root of your application.
@@ -41,8 +44,7 @@ class MyApp extends StatelessWidget {
         ),
         useMaterial3: true,
       ),
-      home: const LoginScreen(),
-      initialRoute: '/login',
+      initialRoute: _authService.user != null ? '/homepage' : '/login',
       routes: _navigationService.routes,
     );
   }
