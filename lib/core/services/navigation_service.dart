@@ -1,3 +1,4 @@
+import 'package:chat_app/view/screen/homepage.dart';
 import 'package:chat_app/view/screen/login_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -8,6 +9,7 @@ class NavigationService {
 
   final Map<String, Widget Function(BuildContext)> _routes = {
     "/login": (context) => const LoginScreen(),
+    "/homepage": (context) => const Homepage(),
   };
 
   Map<String, Widget Function(BuildContext)> get routes => _routes;
