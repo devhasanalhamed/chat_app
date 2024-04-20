@@ -32,6 +32,17 @@ class AuthService {
     return false;
   }
 
+  Future<bool> logOut() async {
+    try {
+      await _firebaseAuth.signOut();
+      return true;
+    } catch (e) {
+      debugPrint('logout error: $e');
+    }
+
+    return false;
+  }
+
   void authStateChangesStreamListener(User? user) {
     // Todo
     // _user = user;
