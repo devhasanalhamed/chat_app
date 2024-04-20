@@ -1,4 +1,5 @@
 import 'package:chat_app/core/services/auth_service.dart';
+import 'package:chat_app/core/services/navigation_service.dart';
 import 'package:chat_app/core/utils/regex.dart';
 import 'package:chat_app/view/widget/custom_form_field.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +15,8 @@ class LoginScreen extends StatefulWidget {
 class LoginScreenState extends State<LoginScreen> {
   final GetIt _getIt = GetIt.instance;
 
+  late NavigationService _navigationService;
+
   final GlobalKey<FormState> _loginFormKey = GlobalKey();
 
   late AuthService _authService;
@@ -23,6 +26,7 @@ class LoginScreenState extends State<LoginScreen> {
   @override
   void initState() {
     _authService = _getIt.get<AuthService>();
+    _navigationService = _getIt.get<NavigationService>();
     super.initState();
   }
 
@@ -126,9 +130,10 @@ class LoginScreenState extends State<LoginScreen> {
             );
 
             if (result) {
-              print('result true');
+              _navigationService.pushReplacementNamed('/homepage');
+              debugPrint('result true');
             } else {
-              print('result false');
+              debugPrint('result false');
             }
           }
         },
