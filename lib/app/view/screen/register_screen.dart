@@ -202,14 +202,23 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   );
                   _alertService.showToast(
                       text: 'User registered successfully!');
+                  _navigationService.goBack();
+                  _navigationService.pushReplacementNamed('/homepage');
+                } else {
+                  throw Exception('Unable to upload user profile picture!');
                 }
                 debugPrint('register result is true');
               }
             } catch (e) {
               debugPrint(e.toString());
+              _alertService.showToast(
+                text: 'Failed to register, Please try again!',
+                icon: Icons.error,
+              );
             }
           } else {
             debugPrint('register failed');
+            throw Exception('Unable to register user');
           }
           setState(() {
             isLoading = false;
