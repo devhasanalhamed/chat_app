@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "660323865478",
+    "project_id": "chat-app-944ce",
+    "storage_bucket": "chat-app-944ce.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:660323865478:android:a4d8b04f028927e6015207",
+        "android_client_info": {
+          "package_name": "com.devhasanalhamed.chat_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBoFlaki-1lWRJY7ZDWLWkQqtdnR5Jv2yo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
