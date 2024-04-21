@@ -1,6 +1,6 @@
-import 'package:chat_app/view/screen/homepage.dart';
-import 'package:chat_app/view/screen/login_screen.dart';
-import 'package:chat_app/view/screen/register_screen.dart';
+import 'package:chat_app/app/view/screen/homepage.dart';
+import 'package:chat_app/app/view/screen/login_screen.dart';
+import 'package:chat_app/app/view/screen/register_screen.dart';
 import 'package:flutter/material.dart';
 
 class NavigationService {
