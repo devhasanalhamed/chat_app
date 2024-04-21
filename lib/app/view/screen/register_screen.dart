@@ -1,6 +1,9 @@
 import 'dart:io';
 
+import 'package:chat_app/app/data/model/user_profile.dart';
+import 'package:chat_app/core/services/alert_service.dart';
 import 'package:chat_app/core/services/auth_service.dart';
+import 'package:chat_app/core/services/database_service.dart';
 import 'package:chat_app/core/services/media_service.dart';
 import 'package:chat_app/core/services/navigation_service.dart';
 import 'package:chat_app/core/services/storage_service.dart';
@@ -25,6 +28,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
   late MediaService _mediaService;
   late NavigationService _navigationService;
   late StorageService _storageService;
+  late DatabaseService _databaseService;
+  late AlertService _alertService;
 
   final GlobalKey<FormState> _registerFormKey = GlobalKey();
 
@@ -37,7 +42,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
     _mediaService = _getIt.get<MediaService>();
     _navigationService = _getIt.get<NavigationService>();
     _authService = _getIt.get<AuthService>();
+    _alertService = _getIt.get<AlertService>();
     _storageService = _getIt.get<StorageService>();
+    _databaseService = _getIt.get<DatabaseService>();
     super.initState();
   }
 
@@ -184,6 +191,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   file: selectedImage!,
                   uid: _authService.user!.uid,
                 );
+
+                if (pfpURL != null) {
+                  await _databaseService.createUserProfile(
+                    userProfile: UserProfile(
+                      uid: _authService.user!.uid,
+                      name: name,
+                      pfpURL: pfpURL,
+                    ),
+                  );
+                  _alertService.showToast(
+                      text: 'User registered successfully!');
+                }
                 debugPrint('register result is true');
               }
             } catch (e) {
