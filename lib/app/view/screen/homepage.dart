@@ -1,3 +1,5 @@
+import 'package:chat_app/app/data/model/user_profile.dart';
+import 'package:chat_app/app/view/widget/chat_tile.dart';
 import 'package:chat_app/core/services/alert_service.dart';
 import 'package:chat_app/core/services/auth_service.dart';
 import 'package:chat_app/core/services/database_service.dart';
@@ -81,7 +83,24 @@ class _HomepageState extends State<Homepage> {
           );
         }
         if (snapshot.hasData && snapshot.data != null) {
-          return ListView();
+          final users = snapshot.data!.docs;
+          return ListView.builder(
+            itemCount: users.length,
+            itemBuilder: (context, index) {
+              UserProfile user = users[index].data();
+              return Padding(
+                padding: const EdgeInsets.symmetric(
+                  vertical: 10.0,
+                ),
+                child: ChatTile(
+                  userProfile: user,
+                  onTap: () async  {
+                    
+                  },
+                ),
+              );
+            },
+          );
         }
         return const Center(
           child: CircularProgressIndicator(),
