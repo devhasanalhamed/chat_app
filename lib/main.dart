@@ -2,7 +2,6 @@ import 'package:chat_app/core/services/auth_service.dart';
 import 'package:chat_app/core/services/navigation_service.dart';
 import 'package:chat_app/core/utils/firebase_utils.dart';
 import 'package:chat_app/core/utils/service_locator_utils.dart';
-import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -19,6 +18,7 @@ Future<void> setup() async {
 }
 
 class MyApp extends StatelessWidget {
+
   final GetIt _getIt = GetIt.instance;
 
   late NavigationService _navigationService;
